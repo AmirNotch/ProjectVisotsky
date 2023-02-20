@@ -45,15 +45,16 @@ namespace API.Extensions
                     }
                 });
             });
-            /*services.AddDbContext<DataContext>(opt =>
-            {
-                opt.UseNpgsql(config.GetConnectionString("Default"));
-            });*/
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlServer(config.GetConnectionString("Default"),
+                opt.UseNpgsql(config.GetConnectionString("Default"),
                     b => b.MigrationsAssembly(typeof(DataContext).Assembly.FullName));
             });
+            // services.AddDbContext<DataContext>(opt =>
+            // {
+            //     opt.UseSqlServer(config.GetConnectionString("Default"),
+            //         b => b.MigrationsAssembly(typeof(DataContext).Assembly.FullName));
+            // });
             
             services.AddHttpContextAccessor();
             services.AddSingleton<IUriService>(o =>
